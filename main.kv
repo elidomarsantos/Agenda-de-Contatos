@@ -1,0 +1,488 @@
+<ContentNavigationDrawer>:
+
+    ScrollView:
+
+        MDList:
+
+            OneLineListItem:
+                text: "Home"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 1"
+
+            OneLineListItem:
+                text: "Inserir Novos Contatos"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 2"
+
+            OneLineListItem:
+                text: "Contatos - Ainda sem Ligação"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 3"     
+
+            OneLineListItem:
+                text: "Contatos - Já efetuada uma ligação"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 4" 
+
+            OneLineListItem:
+                text: "Revisitas/Estudos"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 5" 
+
+            OneLineListItem:
+                text: "Informações dos Contatos"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 6"       
+
+            
+            OneLineListItem:
+                text: "Limpar Contatos"
+                on_press:
+                    app.del_store()
+
+      
+                
+                    
+
+<ListItemWithCheckbox>:
+    
+ 
+    IconLeftWidget:
+        icon: root.icon
+        
+    RightCheckbox:
+        id:check
+    
+    
+  
+
+MDScreen:
+    MDBottomAppBar:
+
+        MDToolbar:
+            id: toolbar
+            title: "Title"
+            icon: "home-account"
+            type: "bottom"
+            mode: "end"
+            elevation: 20
+            title: "Ministério por Telefone"
+            theme_text_color: "Custom"
+            text_color: 'F8F8FF'
+            left_action_items: [["arrow-up-bold-box", lambda x: nav_drawer.set_state("open")]]
+            on_action_button: screen_manager.current = "scr 1"
+
+    MDNavigationLayout:
+        x: toolbar.height
+
+        ScreenManager:
+            id: screen_manager
+
+            MDScreen:
+                name: "scr 1"
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: None, None
+                    size: "400dp", "560dp"
+                    pos_hint: {"center_x": .5, "center_y": .68}
+                    elevation: 20  
+                    border_radius: 20
+                    radius: [15]     
+
+                    FitImage:
+                        id: avatar
+                        size_hint: None, None
+                        size: "380dp", "560dp"
+                        source: "foto.png"
+                        pos_hint:{"center_x": .5, "center_y": .55}
+                        border_radius: 20
+                        radius: [15]   
+
+                MDFillRoundFlatIconButton:
+                    icon: "card-account-phone"
+                    text: "Quer Inserir Novos Contatos? Clique Aqui!!"
+                    pos_hint:{"center_x": .5, "center_y": .33}
+                    md_bg_color: app.theme_cls.primary_color 
+                    elevation: 20
+                    font_size: "16sp"
+                    theme_text_color: "Custom"
+                    text_color: 'F8F8FF'
+                    size_hint_x: .9
+                    size_hint_y: .05
+                    on_release: screen_manager.current = "scr 2" 
+                    
+                   
+                   
+
+                MDFillRoundFlatIconButton:
+                    icon: "card-account-phone"
+                    text: "Contatos - Ainda sem Ligação"
+                    pos_hint:{"center_x": .5, "center_y": .27}
+                    md_bg_color: app.theme_cls.primary_color 
+                    elevation: 20
+                    font_size: "16sp"
+                    theme_text_color: "Custom"
+                    text_color: 'F8F8FF' 
+                    size_hint_x: .9 
+                    size_hint_y: .05
+                    on_release: screen_manager.current = "scr 3"    
+
+                MDFillRoundFlatIconButton:
+                    icon: "card-account-phone"
+                    text: "Contatos - Já Efetuada uma Ligação"
+                    pos_hint:{"center_x": .5, "center_y": .21}
+                    md_bg_color: app.theme_cls.primary_color 
+                    elevation: 20
+                    font_size: "16sp"
+                    theme_text_color: "Custom"
+                    text_color: 'F8F8FF' 
+                    size_hint_x: .9 
+                    size_hint_y: .05
+                    on_release: screen_manager.current = "scr 4"    
+           
+                MDFillRoundFlatIconButton:
+                    icon: "card-account-phone"
+                    text: "Revisitas/Estudos"
+                    pos_hint:{"center_x": .5, "center_y": .15}
+                    md_bg_color: app.theme_cls.primary_color 
+                    elevation: 20
+                    font_size: "16sp"
+                    theme_text_color: "Custom"
+                    text_color: 'F8F8FF' 
+                    size_hint_x: .9 
+                    size_hint_y: .05 
+                    on_release: screen_manager.current = "scr 5"   
+
+            MDScreen:
+                name: "scr 2"
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: None, None
+                    size: "500dp", "600dp"
+                    pos_hint: {"center_x": .5, "center_y": .55}
+                    elevation: 20    
+
+                
+
+                MDTextField:
+                    id: prefixo
+                    icon_right: "cellphone-basic"
+                    hint_text: "Prefixo, por exemplo: 071"
+                    pos_hint: {"center_x": .5, "center_y": .75}
+                    max_text_length: 3
+                    size_hint_x: .7
+                    mode: "fill"
+                    font_size: 80
+
+                MDTextField:
+                    id: telefone
+                    icon_right: "cellphone-basic"
+                    hint_text: "Telefone (não esqueça do 9!)"
+                    pos_hint: {"center_x": .5, "center_y": .6}
+                    max_text_length: 9
+                    size_hint_x: .7
+                    mode: "fill"
+                    font_size: 80
+
+                MDTextField:
+                    id: quantidade
+                    icon_right: "cellphone-basic"
+                    hint_text: "Quantidade, ex.: 100"
+                    pos_hint: {"center_x": .5, "center_y": .45}
+                    max_text_length: 3
+                    size_hint_x: .7
+                    mode: "fill"
+                    font_size: 80
+
+               
+
+                MDFillRoundFlatIconButton:
+                    icon: "gesture-double-tap"
+                    text: "Confirmar"
+                    pos_hint: {"center_x": .5, "center_y": .3}
+                    md_bg_color: app.theme_cls.primary_color 
+                    elevation: 20
+                    font_size: "17sp"
+                    theme_text_color: "Custom"
+                    text_color: 'F8F8FF' 
+                    on_press: app.consulta()
+                    on_release: screen_manager.current = "scr 3"
+                    font_size: "30sp"
+                   
+ 
+                    
+                    
+
+                    
+
+
+            MDScreen:
+                name: "scr 3"
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: None, None
+                    size: "300dp", "580dp"
+                    pos_hint: {"center_x": .5, "center_y": .49}
+                   
+                    border_radius: 20
+                    radius: [15]    
+
+                
+                    
+                    
+                    ScrollView:
+
+
+                        MDList:
+                            id: lista_numeros
+                            
+                                
+                            
+                
+                MDFillRoundFlatIconButton:
+                    text: ''
+                    icon: "gesture-double-tap"
+                    md_bg_color: app.theme_cls.primary_color
+                    pos_hint: {"center_x": .5, "center_y": .90}
+                    on_release: screen_manager.current = "scr 6"
+                    font_size: "20sp"
+                    size_hint_x: .9
+                    id: escolha_numero
+                    size_hint_y: .07
+
+            MDScreen:
+                name: "scr 4"
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: None, None
+                    size: "300dp", "580dp"
+                    pos_hint: {"center_x": .5, "center_y": .49}
+                   
+                    border_radius: 20
+                    radius: [15]    
+
+                
+                    
+                    
+                    ScrollView:
+
+
+                        MDList:
+                            id: lista_numeros1
+                            
+                                
+                            
+                
+                MDFillRoundFlatIconButton:
+                    text: ''
+                    icon: "gesture-double-tap"
+                    md_bg_color: app.theme_cls.primary_color
+                    pos_hint: {"center_x": .5, "center_y": .90}
+                    on_release: screen_manager.current = "scr 6"
+                    font_size: "20sp"
+                    size_hint_x: .9
+                    id: escolha_numero1
+                    size_hint_y: .07
+
+            MDScreen:
+                name: "scr 5"
+
+                
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: None, None
+                    size: "300dp", "580dp"
+                    pos_hint: {"center_x": .5, "center_y": .49}
+                   
+                    border_radius: 20
+                    radius: [15]    
+
+                
+                    
+                    
+                    ScrollView:
+
+
+                        MDList:
+                            id: lista_numeros2
+                            
+                                
+                            
+                
+                MDFillRoundFlatIconButton:
+                    text: ''
+                    icon: "gesture-double-tap"
+                    md_bg_color: app.theme_cls.primary_color
+                    pos_hint: {"center_x": .5, "center_y": .90}
+                    on_release: screen_manager.current = "scr 6"
+                    font_size: "20sp"
+                    size_hint_x: .9
+                    id: escolha_numero2
+                    size_hint_y: .07
+
+                    
+
+            MDScreen:
+                name: "scr 6"
+             
+
+                MDLabel:
+                    id: ficha_prefixo
+                    text: ""
+                    halign: "center"
+                    theme_text_color: 'Custom'
+                    text_color: 'F8F8FF'
+                    font_size: 5
+                    bold: 'True'
+                    pos_hint: {"center_x": .3, "center_y": .90}
+                    size_hint_x: .2
+                    size_hint_y: .1
+                    border_radius: 20
+                    radius: [15]
+                
+                MDLabel:
+                    id: ficha_telefone
+                    text: ""
+                    halign: "center"
+                    theme_text_color: 'Custom'
+                    text_color: 'B71C1C'
+                    font_size: 70
+                    bold: 'True'
+                    pos_hint: {"center_x": .5, "center_y": .93}
+                    size_hint_x: .6
+                    size_hint_y: .1
+                    border_radius: 20
+                    radius: [15]
+            
+  
+                MDTextField:
+                    id: ficha_nome
+                    mode: "rectangle"
+                    hint_text: "Nome"
+                    size_hint_x: .6
+                    pos_hint: {"center_x": .5, "center_y": .86}
+                    font_size: 70
+
+ 
+                MDBoxLayout:
+                    id: text_box
+                    orientation: "vertical"
+                    adaptive_height: True
+                    spacing: "10dp"
+                    padding: 0, "10dp", "10dp", "10dp"
+
+
+                MDTextField:
+                    id: ficha_obs
+                    multiline: True
+                    mode: "rectangle"
+                    hint_text: "Observações"
+                    size_hint_x: .6
+                    pos_hint: {"center_x": .5, "center_y": .70}
+                    font_size: 60
+                    max_text_length: 120
+
+                MDFillRoundFlatIconButton:
+                    text: "Salvar como Revisita/Estudo?"
+                    pos_hint: {"center_x": .5, "center_y": .42}
+                    icon: "gesture-double-tap"
+                    elevation: 10
+                    md_bg_color: app.theme_cls.primary_color
+                    theme_text_color: 'Custom'
+                    text_color: 'F8F8FF'
+                    bold: 'True'
+                    on_release: app.revisita()
+                    font_size: "20sp"
+                    size_hint_x: .9
+ 
+                MDFillRoundFlatIconButton:
+                    text: "Salvar Informações do Contato"
+                    pos_hint: {"center_x": .5, "center_y": .35}
+                    icon: "gesture-double-tap"
+                    elevation: 10
+                    md_bg_color: app.theme_cls.primary_color
+                    theme_text_color: 'Custom'
+                    text_color: 'F8F8FF'
+                    bold: 'True'
+                    on_release: app.salvar_na_lista()
+                    font_size: "20sp"
+                    size_hint_x: .9
+                    
+                    
+                    
+                MDFillRoundFlatIconButton:
+                    text: "Contatos Ainda sem Ligações"
+                    pos_hint: {"center_x": .5, "center_y": .28}
+                    icon: "arrow-left-bold-outline"
+                    elevation: 10
+                    md_bg_color: app.theme_cls.primary_color
+                    theme_text_color: 'Custom'
+                    text_color: 'F8F8FF'
+                    bold: 'True'
+                    on_release: screen_manager.current = "scr 3"
+                    font_size: "20sp"
+                    size_hint_x: .9
+
+                MDFillRoundFlatIconButton:
+                    text: "Contatos com Ligação Efetuada"
+                    pos_hint: {"center_x": .5, "center_y": .21}
+                    icon: "arrow-left-bold-outline"
+                    elevation: 20
+                    md_bg_color: app.theme_cls.primary_color
+                    theme_text_color: 'Custom'
+                    text_color: 'F8F8FF'
+                    bold: 'True'
+                    on_release: screen_manager.current = "scr 4"
+                    font_size: "20sp"
+                    size_hint_x: .9  
+
+                MDFillRoundFlatIconButton:
+                    text: "Revisitas/Estudos"
+                    pos_hint: {"center_x": .5, "center_y": .14}
+                    icon: "arrow-left-bold-outline"
+                    elevation: 20
+                    md_bg_color: app.theme_cls.primary_color
+                    theme_text_color: 'Custom'
+                    text_color: 'F8F8FF'
+                    bold: 'True'
+                    on_release: screen_manager.current = "scr 5"
+                    font_size: "20sp"
+                    size_hint_x: .9  
+
+
+
+                MDFloatingActionButton:
+
+                    icon: "phone"
+                    md_bg_color: app.theme_cls.primary_color
+                    pos_hint: {'center_x': .5, 'center_y': .51}
+                    elevation: 20
+                    user_font_size: "48sp"
+                    on_release: app.abrir_telefone()
+                    on_press: app.efetuadas()
+                    
+            
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
+
